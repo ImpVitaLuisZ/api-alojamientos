@@ -5,10 +5,14 @@ from sqlalchemy.engine import URL
 
 load_dotenv()
 
+
 class Config:
     """Configuration class for the application."""
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    SECRET_KEY = os.getenv("SECRET_KEY", "").strip()
+    JWT_EXP_MINUTES = int(os.getenv("JWT_EXP_MINUTES", "15").strip())
 
     _db_user = os.getenv("DB_USER", "root").strip()
     _db_password = os.getenv("DB_PASSWORD", "").strip()
@@ -22,15 +26,16 @@ class Config:
         password=_db_password,
         host=_db_host,
         port=_db_port,
-        database=_db_name
+        database=_db_name,
     )
 
     _cors = os.getenv(
-        "CORS_ALLOWED_ORIGINS", 
+        "CORS_ALLOWED_ORIGINS",
         "http://localhost:5173,http://localhost:3000",
     )
 
     CORS_ALLOWED_ORIGINS = [
-        origin.strip() for origin in _cors.split(",") if origin.strip()
-        ]
-    
+        origin.strip()
+        for origin in _cors.split(",")
+        if origin.strip()
+    ]
