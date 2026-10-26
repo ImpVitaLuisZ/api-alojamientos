@@ -29,7 +29,7 @@ def create_app(configuracion=None):
     def health():
         return {
             "status": "ok",
-            "service": "Alojamientos-api",
+            "service": "alojamientos-api",
             "version": API_VERSION,
         }, 200
 
