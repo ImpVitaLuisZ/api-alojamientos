@@ -34,6 +34,9 @@ def create_app(configuracion=None):
         }, 200
 
     # Importar los modelos permite que Alembic detecte sus tablas.
+    from app.dominios.alojamientos import modelos as alojamientos_modelos  # noqa: F401
+    from app.dominios.alojamientos.controladores import alojamientos_bp
+    from app.dominios.comodidades.controladores import comodidades_bp
     from app.dominios.usuarios import modelos  # noqa: F401
     from app.dominios.usuarios import controladores as usuarios_ctrl
     from app.dominios.usuarios.controladores import admin_bp, usuarios_bp
@@ -52,6 +55,16 @@ def create_app(configuracion=None):
     app.register_blueprint(
         admin_bp,
         url_prefix=f"/api/{API_VERSION}/admin",
+    )
+
+    app.register_blueprint(
+        alojamientos_bp,
+        url_prefix=f"/api/{API_VERSION}/alojamientos",
+    )
+
+    app.register_blueprint(
+        comodidades_bp,
+        url_prefix=f"/api/{API_VERSION}/comodidades",
     )
 
     @app.errorhandler(ValidationError)

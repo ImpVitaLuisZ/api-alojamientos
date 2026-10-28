@@ -20,6 +20,8 @@ class Usuario(db.Model):
         server_default="usuario",
     )
 
+    alojamientos = db.relationship("Alojamiento", back_populates="usuario")
+
     perfil = db.relationship(
         "PerfilUsuario",
         back_populates="usuario",
