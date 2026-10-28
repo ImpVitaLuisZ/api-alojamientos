@@ -13,7 +13,7 @@ def test_health_responde_json_esperado(client):
     assert respuesta.content_type.startswith("application/json")
     assert datos == {
         "status": "ok",
-        "service": "Alojamientos-api",
+        "service": "alojamientos-api",
         "version": "v1",
 
     }
